@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - <%= user.full_name %></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        
+        /* Report Gereja Damai Container - Full Screen */
+        #admin-app-container {
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border: none;
+            display: block;
+        }
+        
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: white;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .user-info {
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loader"></div>
+        <div class="loading-text">Memuat Report Gereja Damai...</div>
+        <div class="user-info">Selamat datang, <%= user.full_name %>!</div>
+    </div>
+    
+    <!-- Report Gereja Damai - Loaded as iframe -->
+    <iframe 
+        id="admin-app-container"
+        src="/report-gereja-damai/index.html"
+        title="Report Gereja Damai - Admin Dashboard"
+        frameborder="0"
+        allow="fullscreen"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
+    ></iframe>
+    
+    <script>
+        // Data user dari server
+        const userData = {
+            userId: <%= user.user_id %>,
+            username: '<%= user.username %>',
+            fullName: '<%= user.full_name %>',
+            email: '<%= user.email %>',
+            role: '<%= user.role_name %>',
+            phoneNumber: '<%= user.phone_number %>'
+        };
+        
+        // Simpan user data ke localStorage untuk diakses Report Gereja Damai
+        localStorage.setItem('gereja_user', JSON.stringify(userData));
+        localStorage.setItem('gereja_auth', 'true');
+        
+        // Hide loading screen setelah iframe loaded
+        const iframe = document.getElementById('admin-app-container');
+        const loadingScreen = document.getElementById('loading-screen');
+        
+        iframe.addEventListener('load', function() {
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+                
+                // Send user data to iframe (cross-origin communication)
+                try {
+                    iframe.contentWindow.postMessage({
+                        type: 'USER_DATA',
+                        user: userData
+                    }, window.location.origin);
+                } catch (e) {
+                    console.log('Cannot send message to iframe:', e);
+                }
+            }, 500);
+        });
+        
+        // Fallback: Hide loading after 3 seconds jika iframe belum load
+        setTimeout(() => {
+            loadingScreen.classList.add('hidden');
+        }, 3000);
+        
+        // Listen for logout message from iframe
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'LOGOUT') {
+                // Clear localStorage
+                localStorage.removeItem('gereja_user');
+                localStorage.removeItem('gereja_auth');
+                
+                // Redirect to logout
+                window.location.href = '/logout';
+            }
+        });
+        
+        // Prevent iframe from breaking out
+        if (window.top !== window.self) {
+            window.top.location = window.self.location;
+        }
+    </script>
+</body>
+</html>

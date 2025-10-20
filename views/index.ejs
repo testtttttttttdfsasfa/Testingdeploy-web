@@ -1,0 +1,201 @@
+<%- include('partials/_header', {title: 'Gereja Damai Kristus Paroki Kampung Duri'}) %>
+
+<body>
+    <nav class="main-nav">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-church"></i> Gereja Damai
+            </a>
+            <ul class="nav-menu">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/calendar">Calendar</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>Welcome to Gereja Damai Kristus Paroki Kampung Duri</h1>
+            <p>A Community of Faith, Hope, and Love</p>
+            <div class="hero-buttons">
+                <a href="/calendar" class="btn btn--primary"><i class="far fa-calendar-alt"></i> View Calendar</a>
+                <a href="#" class="btn btn--outline"><i class="fas fa-clock"></i> Mass Times</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="info-cards">
+                <div class="info-card">
+                    <i class="fas fa-clock fa-2x"></i>
+                    <h3>Sunday Mass</h3>
+                    <p>7:00 AM, 9:00 AM, 11:00 AM, 5:00 PM</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-calendar-day fa-2x"></i>
+                    <h3>Daily Mass</h3>
+                    <p>Monday - Saturday: 6:30 AM, 8:00 AM</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-map-marker-alt fa-2x"></i>
+                    <h3>Location</h3>
+                    <p>123 Faith Street, Your City</p>
+                </div>
+            </section>
+
+            <section class="upcoming-events">
+                <h2>Upcoming Events</h2>
+                <p class="section-subtitle">Join us for our upcoming Masses, prayers, and community gatherings</p>
+
+                <div class="event-cards-container">
+                    <%#
+                        Helper object untuk memetakan kategori dari database ke class CSS.
+                        Ini membuat kode lebih bersih dan mudah dikelola.
+                    %>
+                    <% const categoryClasses = {
+                        'Special Events': { card: 'event-card--special', tag: 'tag--special' },
+                        'Prayer & Devotion': { card: 'event-card--prayer', tag: 'tag--prayer' },
+                        'Community Activities': { card: 'event-card--community', tag: 'tag--community' }
+                    }; %>
+
+                    <%# Cek jika variabel 'events' ada dan tidak kosong %>
+                    <% if (events && events.length > 0) { %>
+                        <%# Loop melalui setiap acara %>
+                        <% events.forEach(event => { %>
+                            <%#
+                                Formatting Waktu: Mengubah format 24 jam (misal: 18:00:00) menjadi 12 jam AM/PM (misal: 6:00 PM)
+                            %>
+                            <%
+                                let displayTime = '';
+                                if (event.start_time) {
+                                    const [h, m] = event.start_time.split(':');
+                                    const hour = parseInt(h, 10);
+                                    const minute = m;
+                                    const ampm = hour >= 12 ? 'PM' : 'AM';
+                                    const displayHour = hour % 12 || 12;
+                                    displayTime = `${displayHour}:${minute} ${ampm}`;
+                                }
+                            %>
+
+                            <div class="event-card <%= categoryClasses[event.category]?.card || '' %>" 
+                                data-title="<%= event.title %>" 
+                                data-tag="<%= event.category %>" 
+                                data-date="<%= new Date(event.event_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %>" 
+                                data-time="<%= displayTime %>" 
+                                data-location="<%= event.location %>" 
+                                data-contact-person="<%= event.contact_person %>" 
+                                data-contact-info="<%= event.contact_info %>" 
+                                data-description="<%= event.description %>">
+                                
+                                <div class="event-card-header">
+                                    <h3 class="event-card-title"><%= event.title %></h3>
+                                    <span class="event-tag <%= categoryClasses[event.category]?.tag || '' %>"><%= event.category %></span>
+                                </div>
+                                <ul class="event-details">
+                                    <li><i class="far fa-calendar-alt"></i> <%= new Date(event.event_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %></li>
+                                    <% if (displayTime) { %>
+                                        <li><i class="far fa-clock"></i> <%= displayTime %></li>
+                                    <% } %>
+                                    <li><i class="fas fa-map-marker-alt"></i> <%= event.location %></li>
+                                    <li><i class="fas fa-user"></i> <%= event.contact_person %></li>
+                                </ul>
+                                <p class="event-description"><%= event.description %></p>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p>There are no upcoming events at this time. Please check back later.</p>
+                    <% } %>
+                </div>
+
+                <div class="calendar-button-container">
+                    <a href="/calendar" class="btn btn--primary">View Full Calendar</a>
+                </div>
+            </section>
+        <section class="ministries-section">
+                <h2>Our Ministries</h2>
+                <p class="section-subtitle">Get involved in our vibrant parish community</p>
+
+                <div class="ministry-cards-container">
+                    <div class="ministry-card">
+                        <div class="ministry-icon-wrapper">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Youth Ministry</h3>
+                        <p>Empowering young Catholics through faith formation, service, and fellowship.</p>
+                    </div>
+
+                    <div class="ministry-card">
+                        <div class="ministry-icon-wrapper">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Social Action</h3>
+                        <p>Serving our community through outreach, charity, and compassionate care.</p>
+                    </div>
+
+                    <div class="ministry-card">
+                        <div class="ministry-icon-wrapper">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Faith Formation</h3>
+                        <p>Growing in faith through education, prayer, and spiritual development.</p>
+                    </div>
+                </div>
+            </section>
+        </div> 
+    </main>
+
+    <div class="modal-overlay" id="event-modal-overlay">
+        <div class="modal" id="event-modal">
+            <div class="modal-header">
+                <div class="modal-header-content">
+                    <h3 id="modal-title">Event Title</h3>
+                    <span class="event-tag" id="modal-tag">Event Tag</span>
+                </div>
+                <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-detail-item">
+                    <i class="far fa-calendar-alt"></i>
+                    <div>
+                        <span>Date</span>
+                        <strong id="modal-date">December 24, 2024</strong>
+                    </div>
+                </div>
+                <div class="modal-detail-item">
+                    <i class="far fa-clock"></i>
+                    <div>
+                        <span>Time</span>
+                        <strong id="modal-time">10:00 PM</strong>
+                    </div>
+                </div>
+                <div class="modal-detail-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <span>Location</span>
+                        <strong id="modal-location">Main Church</strong>
+                    </div>
+                </div>
+                <div class="modal-detail-item">
+                    <i class="fas fa-user"></i>
+                    <div>
+                        <span>Contact Person</span>
+                        <strong id="modal-contact-person">Fr. John Smith</strong>
+                        <a href="#" id="modal-contact-info">+1 234-567-8900</a>
+                    </div>
+                </div>
+                <div class="modal-description">
+                    <h4>Description</h4>
+                    <p id="modal-description">Join us for our special Christmas Eve midnight Mass celebration</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/_footer') %>
+
+</body>
+</html>

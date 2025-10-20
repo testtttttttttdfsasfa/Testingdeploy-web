@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Gereja Damai - Management System</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        border: 'hsl(var(--border))',
+                        input: 'hsl(var(--input))',
+                        ring: 'hsl(var(--ring))',
+                        background: 'hsl(var(--background))',
+                        foreground: 'hsl(var(--foreground))',
+                        primary: {
+                            DEFAULT: 'hsl(var(--primary))',
+                            foreground: 'hsl(var(--primary-foreground))',
+                        },
+                        secondary: {
+                            DEFAULT: 'hsl(var(--secondary))',
+                            foreground: 'hsl(var(--secondary-foreground))',
+                        },
+                        destructive: {
+                            DEFAULT: 'hsl(var(--destructive))',
+                            foreground: 'hsl(var(--destructive-foreground))',
+                        },
+                        muted: {
+                            DEFAULT: 'hsl(var(--muted))',
+                            foreground: 'hsl(var(--muted-foreground))',
+                        },
+                        accent: {
+                            DEFAULT: 'hsl(var(--accent))',
+                            foreground: 'hsl(var(--accent-foreground))',
+                        },
+                        popover: {
+                            DEFAULT: 'hsl(var(--popover))',
+                            foreground: 'hsl(var(--popover-foreground))',
+                        },
+                        card: {
+                            DEFAULT: 'hsl(var(--card))',
+                            foreground: 'hsl(var(--card-foreground))',
+                        },
+                    },
+                    borderRadius: {
+                        lg: 'var(--radius)',
+                        md: 'calc(var(--radius) - 2px)',
+                        sm: 'calc(var(--radius) - 4px)',
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/styles.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Chart.js for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- SheetJS for Excel export -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+</head>
+<body class="antialiased">
+    <!-- Main App Container -->
+    <div id="app" class="flex h-screen w-full">
+        <!-- Sidebar -->
+        <aside class="w-64 border-r border-gray-200 bg-gray-50">
+            <div class="p-4">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="church" class="h-8 w-8 text-blue-600"></i>
+                    <div>
+                        <h1 class="text-lg font-semibold">Report Gereja Damai</h1>
+                        <p class="text-sm text-gray-600">Management System</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="p-4">
+                <ul class="space-y-2" id="menu-list">
+                    <!-- Menu items will be inserted here -->
+                </ul>
+            </nav>
+            
+            <div class="absolute bottom-0 w-64 p-4 text-sm text-gray-600">
+                <p>Gereja Damai Kristus</p>
+                <p>Admin Portal v2.0</p>
+                <p class="text-xs mt-1 text-green-600">Pure JavaScript</p>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="flex-1 overflow-auto">
+            <div class="p-6" id="main-content">
+                <!-- Content will be loaded here -->
+                <div class="flex items-center justify-center h-64">
+                    <div class="animate-pulse text-gray-400">Loading...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
+
+    <!-- Load Scripts -->
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>

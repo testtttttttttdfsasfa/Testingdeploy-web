@@ -1,0 +1,61 @@
+<%- include('partials/_header', {title: 'Parish Calendar'}) %>
+
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+
+<body>
+    <nav class="main-nav">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-church"></i> Gereja Damai
+            </a>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calendar" class="active">Calendar</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <header class="page-header">
+                <h1>Parish Calendar</h1>
+                <p>View all Masses, events, and activities</p>
+            </header>
+
+            <div class="calendar-container">
+                <div id='calendar'></div>
+            </div>
+        </div>
+    </main>
+
+    <%- include('partials/_footer') %>
+
+    <script>
+        // Inisialisasi FullCalendar
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth', // Tampilan awal adalah bulan
+                initialDate: '2025-10-19',   // Atur ke tanggal saat ini atau tanggal dari gambar
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+                    // Anda bisa menambahkan acara di sini
+                    // Contoh:
+                    {
+                      title: 'Christmas Eve Mass',
+                      start: '2025-12-24T22:00:00'
+                    }
+                ]
+            });
+            calendar.render();
+        });
+    </script>
+</body>
+</html>

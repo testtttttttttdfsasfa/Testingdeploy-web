@@ -1,0 +1,85 @@
+<%- include('partials/_header', {title: 'About Us'}) %>
+
+<body>
+    <nav class="main-nav">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-church"></i> Gereja Damai
+            </a>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calendar">Calendar</a></li>
+                <li><a href="/about" class="active">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <header class="page-header">
+                <h1>About St. Mary's Parish</h1>
+                <p>A welcoming Catholic community serving our neighborhood since 1952</p>
+            </header>
+
+            <section class="about-section">
+                <div class="content-box">
+                    <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                    <p>
+                        St. Mary's Parish is a vibrant Catholic community dedicated to growing in faith, serving others, and spreading the Gospel of Jesus Christ. We welcome all to join us in worship, fellowship, and service as we seek to be the hands and feet of Christ in our community.
+                    </p>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="content-box">
+                    <h3><i class="fas fa-heart"></i> Our Values</h3>
+                    <ul class="values-list">
+                        <li><strong>Faith:</strong> Deepening our relationship with God through prayer, worship, and the sacraments</li>
+                        <li><strong>Community:</strong> Building lasting relationships and supporting one another</li>
+                        <li><strong>Service:</strong> Reaching out to those in need with compassion and love</li>
+                        <li><strong>Growth:</strong> Continuous learning and spiritual development for all ages</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="about-section-grid">
+                <div class="content-box">
+                    <h3><i class="fas fa-users"></i> Our Community</h3>
+                    <p>
+                        We are a diverse community of over 1,200 families from various backgrounds, united in faith and committed to serving God and one another.
+                    </p>
+                </div>
+                <div class="content-box">
+                    <h3><i class="fas fa-book-open"></i> Faith Formation</h3>
+                    <p>
+                        We offer comprehensive religious education programs for children, youth, and adults, including sacramental preparation and Bible study groups.
+                    </p>
+                </div>
+            </section>
+
+            <section class="about-section">
+                <div class="content-box pastor-box">
+                    <h3><i class="fas fa-user-tie"></i> Our Pastor</h3>
+                    <div class="pastor-info">
+                        <div class="pastor-avatar">
+                            <span>JS</span>
+                        </div>
+                        <div class="pastor-details">
+                            <h4>Fr. John Smith</h4>
+                            <span>Pastor</span>
+                        </div>
+                    </div>
+                    <p class="pastor-bio">
+                        Father John has been serving St. Mary's Parish since 2015. With a heart for evangelization and pastoral care, he is dedicated to nurturing the spiritual growth of our parish family and reaching out to those seeking God.
+                    </p>
+                </div>
+            </section>
+        </div> 
+    </main>
+
+    <%- include('partials/_footer') %> 
+    
+</body>
+</html>

@@ -1,0 +1,50 @@
+<%- include('partials/_header', {title: 'Dashboard'}) %>
+<body>
+    <div id="home-page" class="page active">
+        <div class="container">
+            <header class="dashboard-header">
+                <div class="header-content">
+                    <h1>Selamat Datang, <%= user.full_name %>!</h1>
+                    <nav class="dashboard-nav">
+                        <a href="/logout" class="btn btn--primary btn--sm">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </nav>
+                </div>
+            </header>
+            
+            <div class="dashboard-content">
+                <div class="user-info-card">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Informasi Pengguna</h3>
+                            <div class="user-details">
+                                <div class="detail-row">
+                                    <span class="detail-label">Nama Lengkap:</span>
+                                    <span class="detail-value"><%= user.full_name %></span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Username:</span>
+                                    <span class="detail-value"><%= user.username %></span>
+                                </div>
+                                <div class="detail-row">
+                                    <span class="detail-label">Email:</span>
+                                    <span class="detail-value"><%= user.email %></span>
+                                </div>
+                                    <div class="detail-row">
+                                    <span class="detail-label">Nomor Telepon:</span>
+                                    <span class="detail-value"><%= user.phone_number %></span>
+                                </div>
+                                <!-- <div class="detail-row">
+                                    <span class="detail-label">Peran:</span>
+                                    <span class="detail-value role-badge"><%= user.role_name %></span>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<%- include('partials/_header', {title: 'Contact Us'}) %>
+
+<body>
+    <nav class="main-nav">
+        <div class="container">
+            <a href="/" class="nav-logo">
+                <i class="fas fa-church"></i> Gereja Damai
+            </a>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calendar">Calendar</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact" class="active">Contact</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <header class="page-header">
+                <h1>Contact Us</h1>
+                <p>We'd love to hear from you. Reach out to us with any questions or concerns.</p>
+            </header>
+
+            <div class="contact-grid">
+                <div class="contact-info-col">
+                    <div class="content-box">
+                        <h4>Get in Touch</h4>
+                        <ul class="contact-details-list">
+                            <li>
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>Address</strong>
+                                    <span>123 Faith Street<br>Your City, ST 12345<br>United States</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <strong>Phone</strong>
+                                    <span>(123) 456-7890</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>Email</strong>
+                                    <span>info@stmarysparish.org</span>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Office Hours</strong>
+                                    <span>Monday - Friday: 9:00 AM - 5:00 PM</span>
+                                    <span>Saturday: 10:00 AM - 2:00 PM</span>
+                                    <span>Sunday: Closed</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="content-box emergency-box">
+                        <h4>Emergency Pastoral Care</h4>
+                        <p>For urgent pastoral needs after hours, please call:</p>
+                        <a href="tel:123-456-7890">(123) 456-7890</a>
+                    </div>
+                </div>
+
+                <div class="contact-form-col">
+                    <div class="content-box">
+                        <h4>Send us a Message</h4>
+                        <form action="/contact" method="POST" class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full-width">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <section class="find-us-section">
+                <div class="content-box">
+                    <h4>Find Us</h4>
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Map location would be displayed here</span>
+                    </div>
+                </div>
+            </section>
+        </div> 
+    </main>
+
+    <%- include('partials/_footer') %> 
+</body>
+</html>
